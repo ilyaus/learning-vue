@@ -4,7 +4,8 @@
         <hr>
 
         <app-all-servers-status />
-
+        <app-server-status />
+        
         <hr>
         <app-footer />
 
