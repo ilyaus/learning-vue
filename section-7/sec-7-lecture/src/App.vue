@@ -4,16 +4,20 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <HelloWorld msg="Welcome to Your Vue.js App"/>
     -->
+    <ServerStatus></ServerStatus>
+    <hr>
+    <server-status/>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
+import ServerStatus from './components/ServerStatus.vue'
 
 export default {
   name: 'app',
   components: {
-    HelloWorld
+    ServerStatus: ServerStatus
   }
 }
 </script>
