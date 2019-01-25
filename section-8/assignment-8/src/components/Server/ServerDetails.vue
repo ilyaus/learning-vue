@@ -1,13 +1,13 @@
 <template>
     <div class="col-xs-12 col-sm-6">
-        <p>Server Status: {{ serverStatus }}</p>
+        <p v-if="server">Server Status: {{ server.status }}</p>
+        <p v-else>Please select a server</p>
         <button @click="setToNormal">Set to Normal</button>
     </div>
-
 </template>
 
 <script>
-    import { eventBus} from "../../main";
+    import {eventBus} from "../../main";
 
     export default {
       props: {
@@ -22,20 +22,18 @@
       },
       data() {
         return {
-          localServerStatus: 'Unknown'
+          server: null
         };
       },
       created () {
-        eventBus.$on('updateStatusDetails', (status) => {this.serverStatus = status});
+        eventBus.$on('updateStatusDetails', (server) => {
+          this.server = server
+        });
       },
 
       methods: {
         setToNormal() {
-          newStatus = {
-            status: 'Normal',
-            id: this.serverId
-          }
-          eventBus.$emit('updateStatus', newStatus);
+          this.server.status = 'Normal'
         }
       }
     }

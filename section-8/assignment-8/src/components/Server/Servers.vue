@@ -1,15 +1,14 @@
 <template>
     <div class="col-xs-12 col-sm-6">
         <ul class="list-group">
-            <li class="list-group-item" v-for="server in servers" @click="showStatus(server)" v-bind:>
-                Server #{{ server.id }} - {{ server.status }}
-            </li>
+          <app-server v-for="(server, index) in this.servers" :key="index" :server="server"/>            
         </ul>
     </div>
 </template>
 
 <script>
-  import {eventBus} from "../../main";
+  import {eventBus} from "../../main"
+  import Server from './Server.vue'
 
   export default {
     data: function () {
@@ -22,15 +21,14 @@
         ]
       }
     },
-    created() {
-      eventBus.$on('updateStatus', (status) => {
-        alert("Updating status to " + status);
-      });
+    components: {
+      'app-server': Server
     },
-
+    created() {
+    },
     methods: {
       showStatus(server) {
-        eventBus.$emit("updateStatusDetails", server.status);
+        eventBus.$emit("updateStatusDetails", server);
       }
     }
   }
